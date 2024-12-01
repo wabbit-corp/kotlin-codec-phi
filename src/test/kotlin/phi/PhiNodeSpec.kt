@@ -24,7 +24,7 @@ class PhiNodeSpec {
         val smallInt = Gen.int(0..3)
 
         Gen.oneOfGen(
-            Gen.pure(PhiNode.Null),
+            Gen.const(PhiNode.Null),
             Gen.byte.map { PhiNode.Byte(it) },
             Gen.short.map { PhiNode.Short(it) },
             Gen.int.map { PhiNode.Int(it) },
@@ -224,8 +224,8 @@ class PhiNodeSerializationSpec {
         val smallInt = Gen.int(0..3)
 
         Gen.oneOfGen(
-            Gen.pure(TestADT.D),
-            Gen.pure(TestADT.E),
+            Gen.const(TestADT.D),
+            Gen.const(TestADT.E),
             Gen.int(-100..100).map { TestADT.C(it) },
             self.repeat(smallInt).map { TestADT.A(it) },
             (Gen.int.map { it.toString() } zip Gen.byte.nullable())
